@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AgroSetu | Farmer–Trader Marketplace</title>
+<style>
+:root{--g:#146b35;--g2:#38a856;--bg:#f4f8f4;--line:#dce7df;--dark:#14321d}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--dark)}
+.wrap{max-width:1100px;margin:auto;padding:0 18px}header{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:5}
+nav{height:68px;display:flex;align-items:center;justify-content:space-between}.brand{font-size:23px;font-weight:900;color:var(--g)}
+.logo{display:inline-grid;place-items:center;background:var(--g);color:#fff;border-radius:12px;width:42px;height:42px;margin-right:8px}
+.links a{margin-left:18px;text-decoration:none;color:#244a2e;font-weight:700}
+.hero{padding:75px 0;background:linear-gradient(135deg,#e8f6eb,#fff)}h1{font-size:clamp(40px,7vw,68px);line-height:1;margin:12px 0}h1 span{color:var(--g)}
+p{color:#627169;line-height:1.65}.btn{display:inline-block;border:0;border-radius:11px;padding:13px 17px;margin:6px 6px 0 0;font-weight:800;cursor:pointer;text-decoration:none}.primary{background:var(--g);color:#fff}.secondary{background:#fff;color:var(--g);border:1px solid #cbded0}
+section{padding:60px 0}.title{text-align:center;margin-bottom:28px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.card,.panel{background:#fff;border:1px solid var(--line);border-radius:18px;padding:20px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.full{grid-column:1/-1}
+label{font-size:12px;font-weight:800}input,select,textarea{width:100%;padding:11px;margin-top:6px;border:1px solid #d3e0d6;border-radius:10px;font:inherit}textarea{min-height:90px}.notice{padding:11px;margin-top:10px;background:#e8f7eb;color:var(--g);border-radius:10px}.error{background:#fff0ed;color:#9d3022}
+.market{background:#fff}.listing{display:flex;justify-content:space-between;padding:13px;border:1px solid var(--line);border-radius:12px;margin:8px 0}.price{font-weight:900;color:var(--g)}
+footer{background:#12351f;color:#dce9df;padding:30px 0}.small{font-size:12px;color:#9caf9f}
+@media(max-width:750px){.links{display:none}.cards,.grid{grid-template-columns:1fr}.full{grid-column:auto}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><nav><div class="brand"><span class="logo">🌱</span>AgroSetu</div><div class="links"><a href="#market">Marketplace</a><a href="#farmer">Farmer</a><a href="#trader">Trader</a><a href="#login">Login</a></div></nav></div></header>
+
+<section class="hero"><div class="wrap">
+<div style="color:#146b35;font-weight:900">FARMER ↔ TRADER MARKETPLACE</div>
+<h1>Better prices start with <span>better connections.</span></h1>
+<p style="font-size:18px;max-width:720px">AgroSetu connects farmers who want to sell agricultural produce with traders and buyers looking to purchase it.</p>
+<a class="btn primary" href="#farmer">👨‍🌾 Sell Your Crop</a><a class="btn secondary" href="#trader">🏪 Buy Produce</a>
+</div></section>
+
+<section><div class="wrap"><div class="title"><h2>How AgroSetu Works</h2><p>One platform for farmers, traders and verified marketplace connections.</p></div>
+<div class="cards"><div class="card"><h3>👨‍🌾 Farmer</h3><p>Create an account and list crop, quantity, quality, location and expected price.</p></div>
+<div class="card"><h3>🏪 Trader</h3><p>Create a business profile and publish crop buying requirements.</p></div>
+<div class="card"><h3>🤝 Offers</h3><p>Traders can make offers and farmers can review them before accepting a deal.</p></div></div></div></section>
+
+<section id="market" class="market"><div class="wrap"><div class="title"><h2>Marketplace</h2><p>Approved listings from the AgroSetu database will appear here.</p></div><div id="marketList" class="panel">Connecting to AgroSetu database…</div></div></section>
+
+<section id="login"><div class="wrap"><div class="title"><h2>Login / Create Account</h2><p>Choose Farmer or Trader during registration.</p></div>
+<div class="panel"><div class="grid">
+<label>Full Name<input id="name" placeholder="Your full name"></label>
+<label>Role<select id="role"><option value="farmer">Farmer</option><option value="trader">Trader</option></select></label>
+<label>Email<input id="email" type="email" placeholder="you@example.com"></label>
+<label>Password<input id="password" type="password" placeholder="Password"></label>
+</div><button class="btn primary" onclick="signup()">Create Account</button><button class="btn secondary" onclick="login()">Login</button><div id="authMsg"></div></div></div></section>
+
+<section id="farmer"><div class="wrap"><div class="title"><h2>👨‍🌾 Farmer — List Crop</h2></div><div class="panel"><div class="grid">
+<label>Crop<select id="crop"><option>Ginger</option><option>Turmeric</option><option>Chamomile</option><option>Other</option></select></label>
+<label>Quantity<input id="qty" placeholder="500 kg"></label><label>Location<input id="loc" placeholder="Village, District"></label><label>Expected Price<input id="price" placeholder="₹/kg"></label>
+<label>Quality<input id="quality" placeholder="A Grade"></label><label>Harvest Date<input id="harvest" type="date"></label>
+<label class="full">Details<textarea id="details" placeholder="Variety, packaging, pickup details"></textarea></label>
+</div><button class="btn primary" onclick="addCrop()">Submit Crop Listing</button><div id="farmerMsg"></div></div></div></section>
+
+<section id="trader"><div class="wrap"><div class="title"><h2>🏪 Trader — Buying Requirement</h2></div><div class="panel"><div class="grid">
+<label>Business Name<input id="business" placeholder="Business name"></label><label>Crop Required<select id="reqcrop"><option>Ginger</option><option>Turmeric</option><option>Chamomile</option><option>Other</option></select></label>
+<label>Quantity Required<input id="reqqty" placeholder="2,000 kg"></label><label>Buying Price<input id="reqprice" placeholder="₹/kg"></label>
+<label>Buying Location<input id="reqloc" placeholder="Udaipur"></label><label>Business Reference<input id="ref" placeholder="GSTIN / business reference"></label>
+<label class="full">Details<textarea id="reqdetails" placeholder="Quality, delivery and payment terms"></textarea></label>
+</div><button class="btn primary" onclick="addRequirement()">Submit Requirement</button><div id="traderMsg"></div></div></div></section>
+
+<footer><div class="wrap"><b>🌱 AgroSetu</b><p class="small">Real MVP connected to your Supabase project. Prices shown by the prototype are not live market quotes.</p></div></footer>
+
+<script>
+const SUPABASE_URL="https://tseosunxjvvrkuxvikhj.supabase.co";
+const SUPABASE_KEY="sb_publishable_TOTyMCrNzMvgGEIl1EfYVw_7q-x8nHc";
+let sb=null;
+function msg(id,t,e=false){const x=document.getElementById(id);x.className=e?"notice error":"notice";x.textContent=t}
+function loadSDK(){const s=document.createElement("script");s.src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";s.onload=()=>{sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);loadMarket()};document.head.appendChild(s)}
+async function signup(){if(!sb)return msg("authMsg","Database connection is loading.",true);const {error}=await sb.auth.signUp({email:email.value,password:password.value,options:{data:{full_name:name.value,role:role.value}}});msg("authMsg",error?error.message:"Account created. Check your email for verification.",!!error)}
+async function login(){if(!sb)return msg("authMsg","Database connection is loading.",true);const {error}=await sb.auth.signInWithPassword({email:email.value,password:password.value});msg("authMsg",error?error.message:"Login successful.",!!error);if(!error)loadMarket()}
+async function user(){return sb?(await sb.auth.getUser()).data.user:null}
+async function addCrop(){if(!sb)return msg("farmerMsg","Database connection is loading.",true);const u=await user();if(!u)return msg("farmerMsg","Please login first.",true);const {error}=await sb.from("produce_listings").insert({farmer_id:u.id,crop:crop.value,quantity:qty.value,location:loc.value,expected_price:price.value,quality:quality.value,harvest_date:harvest.value||null,details:details.value});msg("farmerMsg",error?error.message:"Crop submitted for admin review.",!!error)}
+async function addRequirement(){if(!sb)return msg("traderMsg","Database connection is loading.",true);const u=await user();if(!u)return msg("traderMsg","Please login first.",true);const {error}=await sb.from("buying_requirements").insert({trader_id:u.id,business_name:business.value,crop:reqcrop.value,quantity:reqqty.value,buying_price:reqprice.value,buying_location:reqloc.value,verification_id:ref.value,details:reqdetails.value});msg("traderMsg",error?error.message:"Buying requirement submitted for verification.",!!error)}
+async function loadMarket(){const {data,error}=await sb.from("produce_listings").select("*").eq("status","approved").order("created_at",{ascending:false});if(error){marketList.textContent="Marketplace is ready; no approved listings yet.";return}marketList.innerHTML=data.length?data.map(x=>`<div class="listing"><div><b>🌾 ${x.crop}</b><br>${x.quantity} • ${x.location}</div><b class="price">${x.expected_price||"Negotiable"}</b></div>`).join(""):"No approved crop listings yet."}
+loadSDK();
+</script>
+</body>
+</html>
